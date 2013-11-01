@@ -3,9 +3,9 @@ pkgboot
 
 Sets up a full work environment for a C++ project that's built with SCons.  To use pkgboot:
 
-* Run `pkgboot NAME` to create an SConstruct file for your project
-* Edit SConstruct to add library dependencies, etc. to the generated file
-* Create a precompiled header file named 'Common.hpp'
+1. Run `pkgboot NAME` to create an SConstruct file for your project
+1. Edit SConstruct to add library dependencies, etc. to the generated file
+1. Create a precompiled header file named 'Common.hpp'
 
 The generated project layout is:
 
