@@ -17,4 +17,6 @@ The generated project layout is:
         test/
         build/
 
-The `include` directory is optional.  Place your source in `src`.
+The `include` directory is optional.  Place your source in `src`.  Tests are
+stand-alone programs (one per .cpp file) that are built into executables that
+are installed under `bin/test/NAME`
