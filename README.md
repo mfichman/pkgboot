@@ -1,7 +1,13 @@
 pkgboot
 =======
 
-Sets up a full work environment for a C++ project that's built with SCons.  To use pkgboot:
+Sets up a full work environment for a C++ project that's built with SCons.  
+
+
+Usage
+-----
+
+To use pkgboot:
 
 1. Run `pkgboot NAME` to create an SConstruct file for your project
 1. Edit SConstruct to add library dependencies, etc. to the generated file
@@ -22,7 +28,7 @@ stand-alone programs (one per .cpp file) that are built into executables that
 are installed under `bin/test/NAME`
 
 
-installation
+Installation
 ------------
 
 Clone the repository and run `python setup.py install.`
