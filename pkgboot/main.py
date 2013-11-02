@@ -1,6 +1,8 @@
 
 import pkgboot
 import argparse
+import os
+import inspect
 
 template = """
 import pkgboot
@@ -21,8 +23,13 @@ def main():
     parser = argparse.ArgumentParser(prog='winbrew', description='Package installer for Windows')
     parser.add_argument('name', type=str, help='name of the package to create')
     args = parser.parse_args()
-    fd = open('SConstruct', 'w')
-    fd.write(template.format(name=args.name))
+    if not os.path.exists('SConstruct'):
+        fd = open('SConstruct', 'w')
+        fd.write(template.format(name=args.name))
+        fd.close()
+
+    fd = open('pkgboot.py', 'w')
+    fd.write(inspect.getsource(pkgboot.package))
     fd.close()
 
 if __name__ == '__main__':

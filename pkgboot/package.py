@@ -6,6 +6,11 @@ import shutil
 import subprocess
 import shlex
 
+try:
+    from SCons.Script import *
+except ImportError:
+    pass
+
 def run_test(target, source, env):
 # Runs a single unit test and checks that the return code is 0
     try:
@@ -26,13 +31,13 @@ class Package:
     major_version = '0'
     minor_version = '0'
     patch = '0'
-    pch = 'Common.hpp'
+    kind = 'lib'
 
     def __init__(self):
-        from SCons.Script import *
 
         (system, _, release, version, machine, proc) = platform.uname()
         self.name = self.__class__.__name__.lower()
+        self.pch = '%s/Common.hpp' % self.name
         self.build_mode = ARGUMENTS.get('mode', 'debug')
         self.version = '.'.join((self.major_version, self.minor_version, self.patch))
         self.branch = os.popen('git rev-parse --abbrev-ref HEAD').read().strip()
@@ -43,9 +48,9 @@ class Package:
             'BRANCH': self.branch,
         })
         self.includes.extend([
-            'C:\\WinBrew\\include',
             'include',
             'src', 
+            'C:\\WinBrew\\include',
         ])
         self.lib_path.extend([
             'C:\\WinBrew\\lib',
@@ -67,7 +72,7 @@ class Package:
         self.env.Append(LIBS=self.libs)
 
         if self.env['PLATFORM'] == 'win32':
-            self.env.Append(CXXFLAGS='/MT /EHsc /Zi /Gm')
+            self.env.Append(CXXFLAGS='/MT /EHsc /Zi /Gm /FS')
             self.env.Append(CXXFLAGS='/Fpbuild/Common.pch')
             self.env.Append(LINKFLAGS='/DEBUG')
             self.env.Append(CXXFLAGS='/Yu%s' % self.pch)
@@ -80,7 +85,10 @@ class Package:
         src = filter(lambda x: 'Common.cpp' not in x.name, src)
         self.env.Depends(src, pch) # Wait for pch to build
 
-        self.lib = self.env.StaticLibrary('lib/jet2', (src, pch))
+        self.lib = self.env.StaticLibrary('lib/%s' % self.name, (src, pch))
+        if self.kind == 'bin':
+            main = self.env.Glob('Main.cpp')
+            self.program = self.env.Program('bin/%s' % self.name, (self.lib, main))
 
         self.env.Append(BUILDERS={'Test': Builder(action=run_test)})
         self.tests = []
