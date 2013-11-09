@@ -81,7 +81,7 @@ class Package:
             pchenv.Append(CXXFLAGS='/Yc%s' % self.pch)
             pch=pchenv.StaticObject('build/src/Common', 'build/src/Common.cpp')
 
-        src = self.env.Glob('build/src/**.cpp')+self.env.Glob('build/src/**.c')
+        src = self.env.Glob('build/src/**.cpp')+self.env.Glob('build/src/**.c')+self.env.Glob('build/src/**.asm')
         src = filter(lambda x: 'Common.cpp' not in x.name, src)
         self.env.Depends(src, pch) # Wait for pch to build
 
