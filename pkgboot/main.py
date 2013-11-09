@@ -20,7 +20,7 @@ class {name}(pkgboot.Package):
 
 
 def main():
-    parser = argparse.ArgumentParser(prog='winbrew', description='Package installer for Windows')
+    parser = argparse.ArgumentParser(prog='pkgboot', description='Package installer for Windows')
     parser.add_argument('name', type=str, help='name of the package to create')
     args = parser.parse_args()
     if not os.path.exists('SConstruct'):
