@@ -84,7 +84,7 @@ class Package:
             pch = pchenv.StaticObject('build/src/Common', 'build/src/Common.cpp')
         else:
             self.env['CXX'] = 'clang++'
-            self.env.Append(CXXFLAGS='-std=c++11 -stdlib=libc++ -g -Wall -Werror -ansi')
+            self.env.Append(CXXFLAGS='-std=c++11 -stdlib=libc++ -g -Wall -Werror')
             self.env.Append(CXXFLAGS='-Wno-c++11-extensions')
             for framework in self.frameworks:
                 self.env.Append(LINKFLAGS='-framework %s' % framework)
