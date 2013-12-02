@@ -23,7 +23,8 @@ def build_pch(target, source, env):
         args = (
             str(env['CXX']),
             str(env['CXXFLAGS']),
-            '-x'
+            ' '.join('-I%s' % path for path in env['CPPPATH']), 
+            '-x',
             'c++-header',
             str(source[0]),
             '-o',
@@ -194,7 +195,7 @@ class Package:
         for test in self.env.Glob('build/test/**.cpp'):
             self.env.Depends(test, self.pch)
             name = test.name.replace('.cpp', '')
-            prog = testenv.Program('bin/test/%s' % name, test)
+            prog = testenv.Program('bin/test/%s' % name, (test, self.pch))
             if 'check' in COMMAND_LINE_TARGETS:
                 self.tests.append(testenv.Test(name, prog))
         if 'check' in COMMAND_LINE_TARGETS:
