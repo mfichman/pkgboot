@@ -94,6 +94,7 @@ class Package:
             return
 
         fd = open('include/%s/Assets.hpp' % self.name, 'w')
+        fd.write('#pragma once\n')
         fd.write('namespace %s {\n' % self.name)
         fd.write('struct Asset {\n')
         fd.write('    char const* name;\n')
