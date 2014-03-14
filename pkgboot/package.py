@@ -160,7 +160,7 @@ class Package:
             self.env.Append(CXXFLAGS='/O2')
         else:
             assert not "Unknown build type"
-        self.env.Append(CXXFLAGS='/W4 /WX /MT /EHsc /Zi /Gm /FS')
+        self.env.Append(CXXFLAGS='/W4 /WX /wd4100 /MT /EHsc /Zi /Gm /FS')
         self.env.Append(CXXFLAGS='/Fpbuild/Common.pch')
         self.env.Append(CXXFLAGS='/Yu%s' % self.pch)
         self.env.Append(LINKFLAGS='/DEBUG')
