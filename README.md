@@ -1,7 +1,7 @@
 pkgboot
 =======
 
-Sets up a full work environment for a C++ project that's built with SCons.  
+Tired of all the setup required to start a new C++ project?  Pkgboot sets up a full work environment for a new C++ project that's built with SCons.
 
 
 Usage
