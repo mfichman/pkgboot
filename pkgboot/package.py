@@ -237,7 +237,7 @@ class Package:
         if self.kind == 'bin':
             main = self.env.Glob('Main.cpp')
             self.env.Depends(main, self.pch)
-            if self.env['PLATFORM'] = 'win32':
+            if self.env['PLATFORM'] == 'win32':
                 self.program = self.env.Program('bin/%s' % self.name, (self.lib, main, self.pch))
             else:
                 self.program = self.env.Program('bin/%s' % self.name, (self.lib, main))
