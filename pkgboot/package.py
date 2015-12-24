@@ -168,15 +168,15 @@ class Package:
         # Add MASM assembly files
 
         self.includes.extend([
-            'C:\\WinBrew\\include',
+            os.environ['LOCALAPPDATA']+'\\WinBrew\\include',
         ])
         self.lib_path.extend([
-            'C:\\WinBrew\\lib',
+            os.environ['LOCALAPPDATA']+'\\WinBrew\\lib',
         ])
         self.path.extend([
             os.environ['PATH'],
-            'C:\\WinBrew\\lib', 
-            'C:\\WinBrew\\bin', 
+            os.environ['LOCALAPPDATA']+'\\WinBrew\\bin',
+            os.environ['LOCALAPPDATA']+'\\WinBrew\\lib',
         ])
         # Extra Windows includes
 
